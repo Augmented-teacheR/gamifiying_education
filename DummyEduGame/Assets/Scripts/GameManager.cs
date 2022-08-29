@@ -17,6 +17,6 @@ public class GameManager : MonoBehaviour
 
     public void play()
     {
-        
+        car.Go(0,0,5);
     }
 }
