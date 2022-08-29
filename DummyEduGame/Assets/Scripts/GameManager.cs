@@ -18,5 +18,7 @@ public class GameManager : MonoBehaviour
     public void play()
     {
         car.Go(0,0,5);
+        train.Beggin();
+        Debug.Log("Button clicked");
     }
 }

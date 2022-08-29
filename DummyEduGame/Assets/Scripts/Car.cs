@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 public enum MovementType
 {
-    time, velocity
+    time, velocity, finished
 }
 
 public class Car : MonoBehaviour
@@ -17,22 +17,37 @@ public class Car : MonoBehaviour
     private float distance;
     private float time;
     private float velocity;
-    private MovementType state;
+    private MovementType state = MovementType.finished;
+
 
     public void Go(float distance, float time, float velocity)
     {
         if (distance == 0) 
-            this.distance = 15;
+            this.distance = 20;
         if (time == 0) 
             this.time = 10;
         if (velocity == 0) 
             this.velocity = 5;
+        this.speed = velocity;
+        state = MovementType.velocity;
+    }
 
-        switch (state)
+    private void Update()
+    {
+        if(state != MovementType.finished)
         {
-            case MovementType.velocity:
+            float x = gameObject.transform.position.x;
+            float y = gameObject.transform.position.y;
+            float z = gameObject.transform.position.z + speed*Time.deltaTime;
 
-                break;
+            gameObject.transform.position = new Vector3(x,y,z);
+            if (z > -5) state = MovementType.finished;
         }
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        Debug.Log("Collision Entered");
+        state = MovementType.finished;
     }
 }
