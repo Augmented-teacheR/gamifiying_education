@@ -31,8 +31,13 @@ public class Train : MonoBehaviour
         }
     }
 
-    internal void Beggin()
+    internal void Begin()
     {
         state = TrainState.running;
+    }
+    private void OnTriggerEnter(Collider other)
+    {
+        Debug.Log("Collision Entered");
+        state = TrainState.finished;
     }
 }

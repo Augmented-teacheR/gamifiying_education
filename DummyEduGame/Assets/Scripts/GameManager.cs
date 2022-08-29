@@ -10,6 +10,8 @@ public class GameManager : MonoBehaviour
     private Train train;
     [SerializeField]
     private CodeBlock codeBlock;
+    [SerializeField]
+    private float speed;
 
     public Car Car { get => car; set => car = value; }
     public Train Train { get => train; set => train = value; }
@@ -17,8 +19,8 @@ public class GameManager : MonoBehaviour
 
     public void play()
     {
-        car.Go(0,0,5);
-        train.Beggin();
+        car.Go(50,5,0);
+        train.Begin();
         Debug.Log("Button clicked");
     }
 }
