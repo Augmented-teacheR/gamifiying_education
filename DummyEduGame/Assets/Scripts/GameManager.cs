@@ -26,6 +26,7 @@ public class GameManager : MonoBehaviour
     public Train Train { get => train; set => train = value; }
     public CodeBlock CodeBlock { get => codeBlock; set => codeBlock = value; }
 
+
     public void Play()
     {
         car.Go(carDistance, carTime, carVelocity);

@@ -21,7 +21,6 @@ public class Car : MonoBehaviour
     [SerializeField]
     private float velocity = 0;
     private float defaultVelocity = 5;
-    private float destinationZ = -5;
 
     [SerializeField]
     private MovementType state = MovementType.finished;
@@ -30,6 +29,7 @@ public class Car : MonoBehaviour
 
     private IEnumerator timerCorutine;
     private IEnumerator distanceCorutine;
+
 
     private void Awake()
     {
@@ -109,8 +109,7 @@ public class Car : MonoBehaviour
         float y = transform.position.y;
         float z = transform.position.z + speed * Time.deltaTime;
 
-        gameObject.transform.position = new Vector3(x, y, z);
-        if (z > destinationZ) state = MovementType.finished;
+        transform.position = new Vector3(x, y, z);
     }
     private void TimeDependantMovement()
     {
@@ -138,7 +137,6 @@ public class Car : MonoBehaviour
     private void TimeAndDistanceDependantMovement()
     {
         VelocityDependantMovement();
-        if (!isMovingToDistance) StartCoroutine(distanceCorutine);
         if (!isTimerCounting) StartCoroutine(timerCorutine);
     }
 
@@ -159,6 +157,8 @@ public class Car : MonoBehaviour
     {
         Debug.Log("Collision Entered");
         Debug.Log(state);
+        Debug.Log(other.gameObject.tag);
         state = MovementType.finished;
+        if (other.gameObject.tag.Equals("SuccessArea")) Debug.Log("Yeeeeeey");
     }
 }
