@@ -11,7 +11,7 @@ public class Train : MonoBehaviour
 {
 
     [SerializeField]
-    private float speed;
+    private float speed = 3.0f;
     [SerializeField]
     private Vector3 position;
     [SerializeField]
@@ -21,12 +21,11 @@ public class Train : MonoBehaviour
     {
         if (state != TrainState.finished)
         {
-            speed = 3;
-            float x = gameObject.transform.position.x + speed * Time.deltaTime;
-            float y = gameObject.transform.position.y;
-            float z = gameObject.transform.position.z;
+            float x = transform.position.x + speed * Time.deltaTime;
+            float y = transform.position.y;
+            float z = transform.position.z;
 
-            gameObject.transform.position = new Vector3(x, y, z);
+            transform.position = new Vector3(x, y, z);
             if (x > 10) state = TrainState.finished;
         }
     }

@@ -37,6 +37,22 @@ public class Car : MonoBehaviour
         timerCorutine = StartTimer();
         distanceCorutine = WaitForDistance();
     }
+
+    [SerializeField]
+    private MovementType state = MovementType.finished;
+    private bool isTimerCounting = false;
+    private bool isMovingToDistance = false;
+
+    private IEnumerator timerCorutine;
+    private IEnumerator distanceCorutine;
+
+
+    private void Awake()
+    {
+        position = transform.position;
+        timerCorutine = StartTimer();
+        distanceCorutine = WaitForDistance();
+    }
     public void Go(float distance, float time, float velocity)
     {
         this.distance = distance != 0 ? distance : this.distance;

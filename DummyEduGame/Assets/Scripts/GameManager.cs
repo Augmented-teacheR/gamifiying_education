@@ -29,14 +29,22 @@ public class GameManager : MonoBehaviour
 
     public void Play()
     {
+        SetCarValues();
         car.Go(carDistance, carTime, carVelocity);
         train.Begin();
         Debug.Log("Button clicked");
+    }
+
+    private void SetCarValues()
+    {
+        codeBlock.ReadValues();
+        this.carDistance = codeBlock.GetDistance();
+        this.carTime = codeBlock.GetTime();
+        this.carVelocity = codeBlock.GetVelocity();
     }
 
     public void ResetScene()
     {
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
-
 }
