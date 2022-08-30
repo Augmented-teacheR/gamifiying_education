@@ -35,6 +35,7 @@ public class Train : MonoBehaviour
     {
         state = TrainState.running;
     }
+
     private void OnTriggerEnter(Collider other)
     {
         Debug.Log("Collision Entered");

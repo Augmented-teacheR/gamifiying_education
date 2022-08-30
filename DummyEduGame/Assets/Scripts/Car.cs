@@ -37,6 +37,7 @@ public class Car : MonoBehaviour
         timerCorutine = StartTimer();
         distanceCorutine = WaitForDistance();
     }
+
     public void Go(float distance, float time, float velocity)
     {
         this.distance = distance != 0 ? distance : this.distance;
@@ -45,6 +46,7 @@ public class Car : MonoBehaviour
 
         this.state = SetState(this.distance, this.time, this.velocity);
     }
+
     private MovementType SetState(float distance, float time, float velocity)
     {
         if(distance != 0 && time != 0)
@@ -111,11 +113,13 @@ public class Car : MonoBehaviour
 
         transform.position = new Vector3(x, y, z);
     }
+
     private void TimeDependantMovement()
     {
         VelocityDependantMovement();
         if (!isTimerCounting) StartCoroutine(timerCorutine);
     }
+
     private IEnumerator StartTimer()
     {
         isTimerCounting = true;
@@ -129,11 +133,13 @@ public class Car : MonoBehaviour
             isMovingToDistance = false;
         }
     }
+
     private void DistanceDependantMovement()
     {
         VelocityDependantMovement();
         if (!isMovingToDistance) StartCoroutine(distanceCorutine);
     }
+
     private void TimeAndDistanceDependantMovement()
     {
         VelocityDependantMovement();
@@ -153,6 +159,7 @@ public class Car : MonoBehaviour
             isTimerCounting = false;
         }
     }
+
     private void OnTriggerEnter(Collider other)
     {
         Debug.Log("Collision Entered");

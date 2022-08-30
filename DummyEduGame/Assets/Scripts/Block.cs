@@ -4,7 +4,7 @@ using UnityEngine;
 
 public enum BlockType
 {
-    speed, distance, time
+    velocity, distance, time
 }
 public class Block : MonoBehaviour
 {
@@ -12,4 +12,20 @@ public class Block : MonoBehaviour
     private BlockType type;
     [SerializeField]
     private float value;
+
+    public Block(BlockType type, float value)
+    {
+        this.type = type;
+        this.value = value;
+    }
+
+    public BlockType GetBlockType()
+    {
+        return this.type;
+    }
+
+    public float GetValue()
+    {
+        return this.value;
+    }
 }
