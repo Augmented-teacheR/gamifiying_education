@@ -9,7 +9,6 @@ public enum MovementType
 
 public class Car : MonoBehaviour
 {
-
     [SerializeField]
     private float speed;
     [SerializeField]
@@ -28,10 +27,15 @@ public class Car : MonoBehaviour
     private MovementType state = MovementType.finished;
     private bool isTimerCounting = false;
     private bool isMovingToDistance = false;
+
+    private IEnumerator timerCorutine;
+    private IEnumerator distanceCorutine;
+
     private void Awake()
     {
         position = transform.position;
-        
+        timerCorutine = StartTimer();
+        distanceCorutine = WaitForDistance();
     }
     public void Go(float distance, float time, float velocity)
     {
@@ -111,35 +115,34 @@ public class Car : MonoBehaviour
     private void TimeDependantMovement()
     {
         VelocityDependantMovement();
-        if (!isTimerCounting) StartCoroutine(StartTimer(time));
+        if (!isTimerCounting) StartCoroutine(timerCorutine);
     }
-    private IEnumerator StartTimer(float seconds)
+    private IEnumerator StartTimer()
     {
         isTimerCounting = true;
-        yield return new WaitForSecondsRealtime(seconds);
+        yield return new WaitForSecondsRealtime(time);
         state = MovementType.finished;
         isTimerCounting = false;
         Debug.Log("Time Out");
         if (isMovingToDistance)
         {
-            //Put the Corutine in a private Ienumarator variable and use that to stop the corutine
-            StopCoroutine("WaitForDistance");
+            StopCoroutine(distanceCorutine);
             isMovingToDistance = false;
         }
     }
     private void DistanceDependantMovement()
     {
         VelocityDependantMovement();
-        if (!isMovingToDistance) StartCoroutine(WaitForDistance(distance));
+        if (!isMovingToDistance) StartCoroutine(distanceCorutine);
     }
     private void TimeAndDistanceDependantMovement()
     {
         VelocityDependantMovement();
-        if (!isMovingToDistance) StartCoroutine(WaitForDistance(distance));
-        if (!isTimerCounting) StartCoroutine(StartTimer(time));
+        if (!isMovingToDistance) StartCoroutine(distanceCorutine);
+        if (!isTimerCounting) StartCoroutine(timerCorutine);
     }
 
-    private IEnumerator WaitForDistance(float distance)
+    private IEnumerator WaitForDistance()
     {
         isMovingToDistance = true;
         yield return new WaitUntil(() => Vector3.Distance(position, transform.position) > distance - 0.05);
@@ -148,8 +151,7 @@ public class Car : MonoBehaviour
         Debug.Log("Distance Reached");
         if (isTimerCounting)
         {
-            //Put the Corutine in a private Ienumarator variable and use that to stop the corutine
-            StopCoroutine("WaitForDistance");
+            StopCoroutine(timerCorutine);
             isTimerCounting = false;
         }
     }
