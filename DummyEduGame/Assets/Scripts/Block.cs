@@ -12,12 +12,13 @@ public class Block : MonoBehaviour
     private BlockType type;
     [SerializeField]
     private float value;
+    [SerializeField]
+    private CodeBlock codeBlock;
 
-    public Block(BlockType type, float value)
-    {
-        this.type = type;
-        this.value = value;
-    }
+    // TODO REMOVE LATER - JUST FOR TESTING
+    public string key;
+
+    public CodeBlock CodeBlock { get => codeBlock; set => codeBlock = value; }
 
     public BlockType GetBlockType()
     {
@@ -27,5 +28,28 @@ public class Block : MonoBehaviour
     public float GetValue()
     {
         return this.value;
+    }
+
+    private void Update()
+    {
+        if (Input.GetKey(key))
+        {
+            float speed = -15.0f;
+            float newX = transform.position.x + speed * Time.deltaTime;
+            float y = transform.position.y;
+            float z = transform.position.z;
+
+            transform.position = new Vector3(newX, y, z);
+        }
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        codeBlock.AddBlock(this);
+    }
+
+    private void OnTriggerExit(Collider other)
+    {
+        codeBlock.RemoveBlock(this);
     }
 }

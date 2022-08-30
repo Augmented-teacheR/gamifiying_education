@@ -14,10 +14,7 @@ public class CodeBlock : MonoBehaviour
     private float readVelocity;
 
     public void ReadValues()
-    {
-        //JUST FOR TESTS, PLEASE DELETE LATER
-        blocks.Add(new Block(BlockType.velocity, 10.0f));
-        
+    {        
         foreach(Block block in blocks) 
         {
             switch (block.GetBlockType()) 
@@ -35,6 +32,16 @@ public class CodeBlock : MonoBehaviour
         }
     }
 
+    public void AddBlock(Block block)
+    {
+        blocks.Add(block);
+    }
+
+    public void RemoveBlock(Block block)
+    {
+        blocks.Remove(block);
+    }
+
     public float GetDistance()
     {
         return this.readDistance;
@@ -42,7 +49,7 @@ public class CodeBlock : MonoBehaviour
 
     public float GetTime()
     {
-        return this.readDistance;
+        return this.readTime;
     }
 
     public float GetVelocity()
