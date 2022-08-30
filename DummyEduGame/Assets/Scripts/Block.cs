@@ -12,13 +12,16 @@ public class Block : MonoBehaviour
     private BlockType type;
     [SerializeField]
     private float value;
-    [SerializeField]
+
     private CodeBlock codeBlock;
 
     // TODO REMOVE LATER - JUST FOR TESTING
     public string key;
 
-    public CodeBlock CodeBlock { get => codeBlock; set => codeBlock = value; }
+    private void Awake()
+    {
+        this.codeBlock = FindObjectOfType<CodeBlock>();
+    }
 
     public BlockType GetBlockType()
     {
