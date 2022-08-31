@@ -157,10 +157,13 @@ public class Car : MonoBehaviour
     }
     private void OnTriggerEnter(Collider other)
     {
-        Debug.Log("Collision Entered");
-        Debug.Log(state);
-        Debug.Log(other.gameObject.tag);
-        state = MovementType.finished;
-        if (other.gameObject.tag.Equals("SuccessArea")) Debug.Log("Yeeeeeey");
+        if(other.gameObject.tag.Equals("Obstacle") || other.gameObject.tag.Equals("SuccessArea"))
+        {
+            Debug.Log("Collision Entered");
+            Debug.Log(state);
+            Debug.Log(other.gameObject.tag);
+            state = MovementType.finished;
+            if (other.gameObject.tag.Equals("SuccessArea")) Debug.Log("Yeeeeeey");
+        }
     }
 }

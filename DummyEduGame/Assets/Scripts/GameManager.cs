@@ -12,6 +12,8 @@ public class GameManager : MonoBehaviour
     private Train train;
     [SerializeField]
     private CodeBlock codeBlock;
+    [SerializeField]
+    private CarInteraction carInteraction;
 
     [Separator]
     [Header("Car Variables")]
@@ -25,7 +27,7 @@ public class GameManager : MonoBehaviour
     public Car Car { get => car; set => car = value; }
     public Train Train { get => train; set => train = value; }
     public CodeBlock CodeBlock { get => codeBlock; set => codeBlock = value; }
-
+    public CarInteraction CarInteraction { get => carInteraction; set => carInteraction = value; }
 
     public void Play()
     {
@@ -46,5 +48,14 @@ public class GameManager : MonoBehaviour
     public void ResetScene()
     {
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+    }
+
+    public IEnumerator StartCar()
+    {
+        Debug.Log("Start car corutine called");
+        yield return new WaitUntil(() => CarInteraction.PlayStarted);
+        Debug.Log("Play Started");
+        yield return new WaitForSeconds(3);
+        Play();
     }
 }

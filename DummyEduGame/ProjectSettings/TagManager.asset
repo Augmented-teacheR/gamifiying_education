@@ -8,6 +8,7 @@ TagManager:
   - Car
   - SuccessArea
   - Block
+  - GameManager
   layers:
   - Default
   - TransparentFX
