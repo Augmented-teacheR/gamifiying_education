@@ -107,11 +107,11 @@ public class Car : MonoBehaviour
 
     private void VelocityDependantMovement()
     {
-        float x = transform.position.x;
-        float y = transform.position.y;
-        float z = transform.position.z + speed * Time.deltaTime;
+        float x = transform.localPosition.x;
+        float y = transform.localPosition.y;
+        float z = transform.localPosition.z + speed * Time.deltaTime;
 
-        transform.position = new Vector3(x, y, z);
+        transform.localPosition = new Vector3(x, y, z);
     }
     private void TimeDependantMovement()
     {
