@@ -20,6 +20,7 @@ public class Car : MonoBehaviour
     private float time = 0;
     [SerializeField]
     private float velocity = 0;
+    [SerializeField]
     private float defaultVelocity = 5;
 
     [SerializeField]
