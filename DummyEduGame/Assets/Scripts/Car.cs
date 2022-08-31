@@ -27,7 +27,7 @@ public class Car : MonoBehaviour
         if (time == 0) 
             this.time = 10;
         if (velocity == 0) 
-            this.velocity = 5;
+            this.velocity = 10;
         this.speed = velocity;
         state = MovementType.velocity;
     }
