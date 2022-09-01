@@ -430,6 +430,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 386680667}
+  - component: {fileID: 386680668}
   m_Layer: 0
   m_Name: Scene
   m_TagString: Untagged
@@ -458,6 +459,18 @@ Transform:
   m_Father: {fileID: 1226122526}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &386680668
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 386680666}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8997073c727236b45b1fee2dc474a01c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!224 &397219907
 RectTransform:
   m_ObjectHideFlags: 0
@@ -1680,6 +1693,18 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 994918359}
     m_Modifications:
+    - target: {fileID: 1184713698808923410, guid: f74afedfdcdece64b8d2ee5c3ce1ba21, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1184713698808923410, guid: f74afedfdcdece64b8d2ee5c3ce1ba21, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 50.0001
+      objectReference: {fileID: 0}
+    - target: {fileID: 1184713699798451076, guid: f74afedfdcdece64b8d2ee5c3ce1ba21, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 1184713699939045660, guid: f74afedfdcdece64b8d2ee5c3ce1ba21, type: 3}
       propertyPath: value
       value: 30
