@@ -21,11 +21,11 @@ public class Train : MonoBehaviour
     {
         if (state != TrainState.finished)
         {
-            float x = transform.position.x + speed * Time.deltaTime;
-            float y = transform.position.y;
-            float z = transform.position.z;
+            float x = transform.localPosition.x + speed * Time.deltaTime;
+            float y = transform.localPosition.y;
+            float z = transform.localPosition.z;
 
-            transform.position = new Vector3(x, y, z);
+            transform.localPosition = new Vector3(x, y, z);
             if (x > 10) state = TrainState.finished;
         }
     }
@@ -36,7 +36,9 @@ public class Train : MonoBehaviour
     }
     private void OnTriggerEnter(Collider other)
     {
-        Debug.Log("Collision Entered");
-        state = TrainState.finished;
+        if (other.gameObject.tag.Equals("Car")){
+            Debug.Log("Collision Entered");
+            state = TrainState.finished;
+        }
     }
 }
