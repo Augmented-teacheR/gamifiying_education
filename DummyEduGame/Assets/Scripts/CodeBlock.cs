@@ -13,9 +13,11 @@ public class CodeBlock : MonoBehaviour
     [SerializeField]
     private float readVelocity;
 
+    public List<Block> Blocks { get => blocks; set => blocks = value; }
+
     public void ReadValues()
     {        
-        foreach(Block block in blocks) 
+        foreach(Block block in Blocks) 
         {
             switch (block.GetBlockType()) 
             {
@@ -34,12 +36,12 @@ public class CodeBlock : MonoBehaviour
 
     public void AddBlock(Block block)
     {
-        blocks.Add(block);
+        Blocks.Add(block);
     }
 
     public void RemoveBlock(Block block)
     {
-        blocks.Remove(block);
+        Blocks.Remove(block);
     }
 
     public float GetDistance()
