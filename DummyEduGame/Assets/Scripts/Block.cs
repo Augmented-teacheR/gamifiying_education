@@ -13,14 +13,14 @@ public class Block : MonoBehaviour
     [SerializeField]
     private float value;
 
-    private CodeBlock codeBlock;
+    //private CodeBlock codeBlock;
 
     // TODO REMOVE LATER - JUST FOR TESTING
     public string key;
 
     private void Awake()
     {
-        this.codeBlock = FindObjectOfType<CodeBlock>();
+        //this.codeBlock = FindObjectOfType<CodeBlock>();
     }
 
     public BlockType GetBlockType()
@@ -46,7 +46,7 @@ public class Block : MonoBehaviour
         }
     }
 
-    private void OnTriggerEnter(Collider other)
+/*    private void OnTriggerEnter(Collider other)
     {
         codeBlock.AddBlock(this);
     }
@@ -54,5 +54,5 @@ public class Block : MonoBehaviour
     private void OnTriggerExit(Collider other)
     {
         codeBlock.RemoveBlock(this);
-    }
+    }*/
 }

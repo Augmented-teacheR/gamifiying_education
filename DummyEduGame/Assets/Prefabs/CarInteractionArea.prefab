@@ -46,6 +46,15 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   gameManager: {fileID: 0}
   car: {fileID: 0}
+  viewRadius: 1
+  viewAngle: 360
+  targetMask:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  obstacleMask:
+    serializedVersion: 2
+    m_Bits: 0
+  visibleTargets: []
 --- !u!65 &8813983634667613919
 BoxCollider:
   m_ObjectHideFlags: 0

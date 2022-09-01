@@ -329,6 +329,7 @@ MonoBehaviour:
   car: {fileID: 1863797180}
   train: {fileID: 5817707}
   codeBlock: {fileID: 363879767}
+  carInteraction: {fileID: 0}
   carTime: 0
   carDistance: 0
   carVelocity: 0
@@ -608,6 +609,7 @@ GameObject:
   - component: {fileID: 363879766}
   - component: {fileID: 363879767}
   - component: {fileID: 363879768}
+  - component: {fileID: 363879769}
   m_Layer: 0
   m_Name: CodeBlock
   m_TagString: Untagged
@@ -623,7 +625,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 363879765}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -19.29, y: 0.5, z: -41.61}
+  m_LocalPosition: {x: -32.76, y: 0.5, z: -41.61}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 431951974}
@@ -658,10 +660,32 @@ BoxCollider:
   m_GameObject: {fileID: 363879765}
   m_Material: {fileID: 0}
   m_IsTrigger: 1
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 2
   m_Size: {x: 2.5407944, y: 2, z: 15.344553}
   m_Center: {x: 0.2703972, y: 0, z: 0.34357166}
+--- !u!114 &363879769
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 363879765}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dd3b77f85cbd6384c8196413fb568a89, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  viewRadius: 10
+  viewAngle: 360
+  targetMask:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  obstacleMask:
+    serializedVersion: 2
+    m_Bits: 0
+  codeBlock: {fileID: 363879767}
+  visibleTargets: []
 --- !u!224 &397219907
 RectTransform:
   m_ObjectHideFlags: 0
@@ -1444,7 +1468,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7036513169200186943, guid: fd756e4e337dc694db0ef398f124d1ef, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 9.29
+      value: 22.87
       objectReference: {fileID: 0}
     - target: {fileID: 7036513169200186943, guid: fd756e4e337dc694db0ef398f124d1ef, type: 3}
       propertyPath: m_LocalPosition.y
@@ -2055,7 +2079,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7036513169200186943, guid: fd756e4e337dc694db0ef398f124d1ef, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 9.29
+      value: 22.869999
       objectReference: {fileID: 0}
     - target: {fileID: 7036513169200186943, guid: fd756e4e337dc694db0ef398f124d1ef, type: 3}
       propertyPath: m_LocalPosition.y
@@ -2229,7 +2253,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7036513169200186943, guid: fd756e4e337dc694db0ef398f124d1ef, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 9.29
+      value: 22.869999
       objectReference: {fileID: 0}
     - target: {fileID: 7036513169200186943, guid: fd756e4e337dc694db0ef398f124d1ef, type: 3}
       propertyPath: m_LocalPosition.y
