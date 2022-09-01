@@ -14,6 +14,16 @@ public class CarInteraction : MonoBehaviour
     private float startingCarPosition;
     private bool playStarted = false;
 
+    public float viewRadius;
+    [Range(0, 360)]
+    public float viewAngle;
+
+    public LayerMask targetMask;
+    public LayerMask obstacleMask;
+
+    [HideInInspector]
+    public List<Transform> visibleTargets = new List<Transform>();
+
     public float StartingCarPosition { get => startingCarPosition; set => startingCarPosition = value; }
     public bool PlayStarted { get => playStarted; set => playStarted = value; }
 
@@ -23,16 +33,42 @@ public class CarInteraction : MonoBehaviour
         _gameManager = gameManager.GetComponent<GameManager>();
         _gameManager.CarInteraction = this;
         StartCoroutine(_gameManager.StartCar());
+        StartCoroutine("FindTargetsWithDelay", .2f);
     }
 
-    private void OnTriggerEnter(Collider other)
-    {
-        if (other.tag.Equals("Car") && !isCarSet)
+    /*    private void OnTriggerEnter(Collider other)
         {
-            this.car = other.gameObject;
-            this._car = this.car.GetComponent<Car>();
-            StartingCarPosition = this.car.transform.position.z;
-            isCarSet = true;
+            if (other.tag.Equals("Car") && !isCarSet)
+            {
+                this.car = other.gameObject;
+                this._car = this.car.GetComponent<Car>();
+                StartingCarPosition = this.car.transform.position.z;
+                isCarSet = true;
+            }
+        }*/
+    IEnumerator FindTargetsWithDelay(float delay)
+    {
+        while (true)
+        {
+            yield return new WaitForSeconds(delay);
+            FindCar();
+        }
+    }
+    void FindCar()
+    {
+        visibleTargets.Clear();
+
+        Collider[] targetsInViewRadius = Physics.OverlapSphere(transform.position, viewRadius, targetMask);
+
+        for (int i = 0; i < targetsInViewRadius.Length; i++)
+        {
+            if (targetsInViewRadius[i].gameObject.tag.Equals("Car") && !isCarSet)
+            {
+                this.car = targetsInViewRadius[i].gameObject;
+                this._car = this.car.GetComponent<Car>();
+                StartingCarPosition = this.car.transform.position.z;
+                isCarSet = true;
+            }
         }
     }
 

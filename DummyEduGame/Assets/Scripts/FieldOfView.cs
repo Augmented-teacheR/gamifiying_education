@@ -42,19 +42,6 @@ public class FieldOfView : MonoBehaviour
         for (int i = 0; i < targetsInViewRadius.Length; i++)
         {
             blocks.Add(targetsInViewRadius[i].gameObject.GetComponent<Block>());
-            //Debug.Log("Collider Detected");
-            /*Transform target = targetsInViewRadius[i].transform;
-
-            Vector3 dirToTarget = (target.position - transform.position).normalized;
-            if (Vector3.Angle(transform.forward, dirToTarget) < viewAngle / 2)
-            {
-                float dstToTarget = Vector3.Distance(transform.position, target.position);
-
-                if (!Physics.Raycast(transform.position, dirToTarget, dstToTarget, obstacleMask))
-                {
-                    visibleTargets.Add(target);
-                }
-            }*/
         }
         codeBlock.Blocks = blocks;
     }
