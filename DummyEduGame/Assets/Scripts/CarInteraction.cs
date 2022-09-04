@@ -9,6 +9,8 @@ public class CarInteraction : MonoBehaviour
     private GameManager _gameManager;
     [SerializeField]
     private GameObject car;
+    [SerializeField]
+    private GameObject target;
     private Car _car;
     private bool isCarSet = false;
     private float startingCarPosition;
@@ -48,6 +50,7 @@ public class CarInteraction : MonoBehaviour
         }*/
     IEnumerator FindTargetsWithDelay(float delay)
     {
+        Debug.Log("Corutine started find target");
         while (true)
         {
             yield return new WaitForSeconds(delay);
@@ -59,15 +62,15 @@ public class CarInteraction : MonoBehaviour
         visibleTargets.Clear();
 
         Collider[] targetsInViewRadius = Physics.OverlapSphere(transform.position, viewRadius, targetMask);
-
         for (int i = 0; i < targetsInViewRadius.Length; i++)
         {
             if (targetsInViewRadius[i].gameObject.tag.Equals("Car") && !isCarSet)
             {
                 this.car = targetsInViewRadius[i].gameObject;
                 this._car = this.car.GetComponent<Car>();
-                StartingCarPosition = this.car.transform.position.z;
+                StartingCarPosition = this.car.transform.localPosition.z;
                 isCarSet = true;
+                Debug.Log("Car found");
             }
         }
     }
@@ -76,14 +79,18 @@ public class CarInteraction : MonoBehaviour
     {
         if (isCarSet)
         {
-            if ((car.transform.position.z < StartingCarPosition + 1)
-            && (car.transform.position.z > StartingCarPosition - 5)
+            if ((car.transform.localPosition.z < StartingCarPosition + 3)
+            && (car.transform.localPosition.z > StartingCarPosition - 5)
             && !PlayStarted)
             {
-                car.transform.position
-                = new Vector3(car.transform.position.x, car.transform.position.y, this.transform.position.z);
+                float zPos = (target.transform.position.z/.007f) -42;
+                var step = 1000 * Time.deltaTime; // calculate distance to move
+                car.transform.localPosition = Vector3.MoveTowards(car.transform.localPosition, new Vector3(car.transform.localPosition.x, car.transform.localPosition.y, zPos), step);
+
+                //car.transform.localPosition
+                //= new Vector3(car.transform.localPosition.x, car.transform.localPosition.y, zPos);
             }
-            if (car.transform.position.z < StartingCarPosition - 4)
+            if (car.transform.localPosition.z < StartingCarPosition - 4)
             {
                 PlayStarted = true;
             }
