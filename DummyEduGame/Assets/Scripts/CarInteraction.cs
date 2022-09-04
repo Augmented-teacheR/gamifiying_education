@@ -83,9 +83,10 @@ public class CarInteraction : MonoBehaviour
             && (car.transform.localPosition.z > StartingCarPosition - 5)
             && !PlayStarted)
             {
-                float zPos = (target.transform.position.z/.007f) -42;
+                float zPos = target.transform.position.z;
+                float zPosMapped = Map(zPos, -0.06f, -0.017f, -50, -34);
                 var step = 1000 * Time.deltaTime; // calculate distance to move
-                car.transform.localPosition = Vector3.MoveTowards(car.transform.localPosition, new Vector3(car.transform.localPosition.x, car.transform.localPosition.y, zPos), step);
+                car.transform.localPosition = Vector3.MoveTowards(car.transform.localPosition, new Vector3(car.transform.localPosition.x, car.transform.localPosition.y, zPosMapped), step);
 
                 //car.transform.localPosition
                 //= new Vector3(car.transform.localPosition.x, car.transform.localPosition.y, zPos);
@@ -95,6 +96,12 @@ public class CarInteraction : MonoBehaviour
                 PlayStarted = true;
             }
         }
+    }
+
+
+    public static float Map(float value, float fromSource, float toSource, float fromTarget, float toTarget)
+    {
+        return (value - fromSource) / (toSource - fromSource) * (toTarget - fromTarget) + fromTarget;
     }
 
 
