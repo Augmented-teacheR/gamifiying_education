@@ -11,7 +11,6 @@ public class CarInteraction : MonoBehaviour
     private GameObject car;
     [SerializeField]
     private GameObject target;
-    private Car _car;
     private bool isCarSet = false;
     private float startingCarPosition;
     private bool playStarted = false;
@@ -25,9 +24,12 @@ public class CarInteraction : MonoBehaviour
 
     [HideInInspector]
     public List<Transform> visibleTargets = new List<Transform>();
+    private float offset;
 
     public float StartingCarPosition { get => startingCarPosition; set => startingCarPosition = value; }
     public bool PlayStarted { get => playStarted; set => playStarted = value; }
+
+
 
     private void Awake()
     {
@@ -67,8 +69,8 @@ public class CarInteraction : MonoBehaviour
             if (targetsInViewRadius[i].gameObject.tag.Equals("Car") && !isCarSet)
             {
                 this.car = targetsInViewRadius[i].gameObject;
-                this._car = this.car.GetComponent<Car>();
                 StartingCarPosition = this.car.transform.localPosition.z;
+                offset = this.car.transform.localPosition.x;
                 isCarSet = true;
                 Debug.Log("Car found");
             }
@@ -79,29 +81,18 @@ public class CarInteraction : MonoBehaviour
     {
         if (isCarSet)
         {
-            if ((car.transform.localPosition.z < StartingCarPosition + 3)
-            && (car.transform.localPosition.z > StartingCarPosition - 5)
+            if ((car.transform.localPosition.z < StartingCarPosition + .1)
+            && (car.transform.localPosition.z > StartingCarPosition - .1)
             && !PlayStarted)
             {
-                float zPos = target.transform.position.z;
-                float zPosMapped = Map(zPos, -0.06f, -0.017f, -50, -34);
-                var step = 1000 * Time.deltaTime; // calculate distance to move
-                car.transform.localPosition = Vector3.MoveTowards(car.transform.localPosition, new Vector3(car.transform.localPosition.x, car.transform.localPosition.y, zPosMapped), step);
-
-                //car.transform.localPosition
-                //= new Vector3(car.transform.localPosition.x, car.transform.localPosition.y, zPos);
+                car.transform.position = target.transform.position;
+                car.transform.localPosition = new Vector3(offset, 0, car.transform.localPosition.z);
             }
-            if (car.transform.localPosition.z < StartingCarPosition - 4)
+            if (car.transform.localPosition.z < StartingCarPosition - .08)
             {
                 PlayStarted = true;
             }
         }
-    }
-
-
-    public static float Map(float value, float fromSource, float toSource, float fromTarget, float toTarget)
-    {
-        return (value - fromSource) / (toSource - fromSource) * (toTarget - fromTarget) + fromTarget;
     }
 
 
